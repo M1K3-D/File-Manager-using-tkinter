@@ -1,16 +1,20 @@
-from tkinter import *
+import tkinter as tk
+from tkinter import Label, Entry, Button, Tk
 import shutil         
 import os
+import subprocess
 
 #   FUNCTIONS
 
 def open_file():
     global e1
     string = e1.get()
-    try:
+    if os.name == 'nt':
         os.startfile(string)
-    except:
-        print('File not found')   
+    elif os.name == 'posix':
+        subprocess.call(('xdg-open', string))
+    else:
+        print('File not found')
     
 def open_window():
     global e1
